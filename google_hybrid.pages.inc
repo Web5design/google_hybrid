@@ -102,6 +102,8 @@ function google_hybrid_openid_authentication($response) {
     $form_state['values']['response'] = $response;
     $form_state['values']['auth_openid'] = $identity;
 
+    drupal_alter('google_hybrid_new_user', $form_state);
+
     if (empty($response['openid.sreg.email']) && empty($response['openid.sreg.nickname'])) {
       drupal_set_message(t('Please complete the registration by filling out the form below. If you already have an account, you can <a href="@login">log in</a> now and add your OpenID under "My account".', array('@login' => url('user/login'))), 'warning');
       $success = FALSE;
